@@ -1,0 +1,75 @@
+class Library:
+    def __init__(self,library_name,book_list):
+        self.library_name =library_name
+        self.book_list =book_list
+        self.lend_record = {}
+
+    def printbooks(self):
+        for items in self.book_list:
+            print(items)
+
+    def addbooks(self):
+        newbook = input("Enter the name of book:")
+        self.book_list.append(newbook)
+        print(f"{newbook} added successfully")
+
+    def avaliable(self):
+        check =  input("Enter the name of books")
+        print("searching........")
+
+        if check in self.book_list:
+            print("Yes...The book is available")
+        else:
+            print('The book is not available')
+
+    def lendbook(self):
+        name = input("Enter your name")
+        lendbook=input("Enter the name of availablebook you want:")
+        if lendbook in self.book_list:
+            print("Successfully issued ...You have to retrun it in 15 days")
+        self.book_list.remove(lendbook)
+        self.lend_record[name]= lendbook
+
+
+    def return_book(self):
+        name,returnbook = input("Enter your name(samewhen you issued the book:)"),input("Enter the book name:")
+        if name  in self.lend_record:
+            self.book_list.append(returnbook)
+            del self.lend_record[name]
+        else:
+            print("You have not issued any book")
+        print("Book returned succesfully")
+
+
+
+Library1 = Library("Harshak's Library",["The secrect","CPP","Wimpykid"])
+
+if __name__ == '__main__':
+    print(f"Welcome to {Library1.library_name} ")
+
+
+print("What you  want to do..")
+print("1.Add books\n2.Lend books\n6.Return book\n3.Search for avalaibility\n4.Record\n5.show all books")
+
+while 'true':
+    n = int(input("Enter one of the above:"))
+
+    if n == 1:
+        Library1.addbooks()
+    if n == 5:
+        Library1.printbooks()
+
+    if n == 3:
+        Library1.avaliable()
+
+    if n  == 2:
+        Library1.lendbook()
+    if n==4:
+        print("This is the record of books issused")
+        print(Library1.lend_record)
+    if n==6:
+        Library1.return_book()
+
+
+
+
